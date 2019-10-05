@@ -1,0 +1,5 @@
+div.box { 
+    position: top: 40px; left: 40px; width: 450px;
+    height: 80px;padding: 10px; background: #fff; 
+    border: 3px dotted #006; font-size: 16px; color: #000 
+}
