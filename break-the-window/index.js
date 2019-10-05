@@ -1,23 +1,26 @@
+const ballSpeed = 4;
+const brickRowCount = 3;
+const brickColumnCount = 5;
+const brickWidth = 75;
+const brickHeight = 20;
+const brickPadding = 10;
+const brickOffsetTop = 30;
+const brickOffsetLeft = 30;
+
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var ballRadius = 10;
 var x = canvas.width / 2;
 var y = canvas.height - 30;
-var dx = 2;
-var dy = -2;
+var dx = ballSpeed;
+var dy = -ballSpeed;
 var paddleHeight = 10;
-var paddleWidth = 76;
+var paddleWidth = 75;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var rightPressed = false;
 var leftPressed = false;
-var brickRowCount = 2;
-var brickColumnCount = 1;
-var brickWidth = 75;
-var brickHeight = 20;
-var brickPadding = 10;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
 var score = 0;
+var lives = 3;
 
 var bricks = [];
 for(var c=0; c<brickColumnCount; c++) {
@@ -86,12 +89,19 @@ drawBricks = () => {
     ctx.closePath();
   }
 
+  drawLives = () => {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+  }
+
   draw = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks();
     drawBall();
     drawPaddle();
     drawScore();
+    drawLives();
     collisionDetection();
  
     x += dx;
@@ -107,9 +117,18 @@ drawBricks = () => {
 　　        dy = -dy;
 　　    }
 　　    else {
-　　        alert("GAME OVER");
-　　        document.location.reload();
-           clearInterval(interval);
+         lives--;
+         if(!lives) {
+             alert("GAME OVER");
+             document.location.reload();
+         }
+         else {
+             x = canvas.width/2;
+             y = canvas.height-30;
+             dx = ballSpeed;
+             dy = -ballSpeed;
+             paddleX = (canvas.width-paddleWidth)/2;
+         }
 　　    }
     }
 
@@ -119,7 +138,11 @@ drawBricks = () => {
     else if(leftPressed && paddleX > 0) {
         paddleX -= 7;
     }
+
+    requestAnimationFrame(draw);
   }
+
+
 
   keyDownHandler = (e) => {
       if(e.key == "Right" || e.key == "ArrowRight") {
@@ -139,7 +162,15 @@ drawBricks = () => {
       }
   }
 
+  mouseMoveHandler = (e) => {
+    var relativeX = e.clientX - canvas.offsetLeft;
+    if(relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth/2;
+    }
+}
+
   document.addEventListener("keydown", keyDownHandler, false);
   document.addEventListener("keyup", keyUpHandler, false);
+  document.addEventListener("mousemove", mouseMoveHandler, false);
 
-  var interval = setInterval(draw, 10);
+draw();
