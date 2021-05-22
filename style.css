@@ -1,0 +1,13 @@
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-container > section {
+  /* background-color: #fff1f1; */
+  width: 600px;
+  margin: 3px;
+  text-align: left;
+  /* line-height: 90px; */
+  /* font-size: 30px; */
+}
