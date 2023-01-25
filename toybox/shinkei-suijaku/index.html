@@ -3,22 +3,27 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="images/icons8-alligator-16.png">
   <link href="style.css" rel="stylesheet">
   <title>わにわに神経衰弱</title>
 </head>
 
 <body>
-  <h1>わにわに神経衰弱</h1>
-  <div id="inputLine">プレイヤーの名前を入力してください:
-    <input id="playerName0" type="text" name="player0">
-    <input id="playerName1" type="text" name="player1">
-    <input id="start" type="button" value="start">
+  <h1>🐊わにわに神経衰弱🐊</h1>
+
+  <div id="inputLine">
+    <p>プレイヤーの名前を入力してください</p>
+    <p>
+      <input class="nameInput" type="text" size="10" placeholder="名前を入力">
+      <input class="nameInput" type="text" size="10" placeholder="名前を入力">
+      <input id="start" type="button" value="start">
+    </p>
   </div>
 
   <div id="playArea" style="visibility: hidden;">
-    <div id="headline"></div>
+    <div><span id="headline"></span></div>
     <div id="score"></div>
-    <div>
+    <div class="wrapper">
       <img class="card" src="images/alligator.png" width="120" height="160">
       <img class="card" src="images/alligator.png" width="120" height="160">
       <img class="card" src="images/alligator.png" width="120" height="160">

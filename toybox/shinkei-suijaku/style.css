@@ -1,0 +1,22 @@
+body {
+  background-color: #276537;
+  color: #fff;
+}
+
+.nameInput {
+  outline: none;
+}
+
+.nameInput:nth-child(1) {
+  border-color: red;
+}
+
+.nameInput:nth-child(2) {
+  border-color: blue;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  grid-gap: 20px;
+}
